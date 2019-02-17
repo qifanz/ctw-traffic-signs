@@ -152,7 +152,7 @@ with open(settings.TRAIN) as f:
         if (has_traffic_signs):
             #print(i)
             list_filtered.append(annot)
-            #augment_image(annot,f2)
+            augment_image(annot,f2)
     print(len(list_filtered))
     for line in list_filtered:
         f1.write(json.dumps(line)+'\n')
