@@ -6,6 +6,7 @@ import os
 import sys
 import numpy as np
 import pprint
+import math
 
 sys.path.append('C:\\Users\\flavi\\PycharmProjects\\ctw-traffic-signs')
 import settings
@@ -82,34 +83,32 @@ def add_rain(image):
     image_RGB = cv2.cvtColor(image_HLS, cv2.COLOR_HLS2RGB)  ## Conversion to RGB
     return image_RGB
 
-def augment_image (annot,f2) :
-    old_id = annot['image_id']
-    path = os.path.join(settings.TRAINVAL_IMAGE_DIR, annot['file_name'])
-    assert os.path.exists(path), 'file not exists: {}'.format(path)
-
+def augment_rain (path,old_id):
     img_original = cv2.imread(path)
     img_original = cv2.cvtColor(img_original, cv2.COLOR_BGR2RGB)
     img_rain = add_rain(img_original)
-    rain_id = old_id[0]+'1'+old_id[2:]
-    annot['image_id']=rain_id
-    f2.write(json.dumps(annot)+'\n')
+    rain_id = old_id[0] + '1' + old_id[2:]
+    annot['image_id'] = rain_id
+    f2.write(json.dumps(annot) + '\n')
     plt.figure(figsize=(16, 16))
     ax = plt.gca()
-    plt.imsave('../data/images/augmented/'+rain_id+'.png',img_rain)
+    plt.imsave('../data/images/augmented/' + rain_id + '.png', img_rain)
     plt.close()
 
+def augment_snow (path,old_id):
     img_original = cv2.imread(path)
     img_original = cv2.cvtColor(img_original, cv2.COLOR_BGR2RGB)
     img_snow = add_snow(img_original)
-    snow_id = old_id[0]+'2'+old_id[2:]
-    annot['image_id']=snow_id
-    f2.write(json.dumps(annot)+'\n')
+    snow_id = old_id[0] + '2' + old_id[2:]
+    annot['image_id'] = snow_id
+    f2.write(json.dumps(annot) + '\n')
     plt.figure(figsize=(16, 16))
     ax = plt.gca()
     plt.imsave('../data/images/augmented/' + snow_id + '.png',
                img_snow)
     plt.close()
 
+def augment_lum_plus (path,old_id):
     img_original = cv2.imread(path)
     img_original = cv2.cvtColor(img_original, cv2.COLOR_BGR2RGB)
     img_lumplus = add_luminosity(img_original)
@@ -121,6 +120,7 @@ def augment_image (annot,f2) :
     plt.imsave('../data/images/augmented/' + lumplus_id + '.png', img_lumplus)
     plt.close()
 
+def augment_lum_min (path,old_id):
     img_original = cv2.imread(path)
     img_original = cv2.cvtColor(img_original, cv2.COLOR_BGR2RGB)
     img_lummin = decrease_luminosity(img_original)
@@ -132,11 +132,82 @@ def augment_image (annot,f2) :
     plt.imsave('../data/images/augmented/' + lummin_id + '.png', img_lummin)
     plt.close()
 
+def augment_flip_hor(path,old_id,annot):
+    img_original = cv2.imread(path)
+    img_flip = cv2.flip(img_original, 1)
+    new_id = old_id[0] + '5' + old_id[2:]
+    cv2.imwrite('../data/images/augmented/' + new_id + '.png', img_flip)
+    annotations = annot['annotations']
+    for sentence in annotations :
+        for instance in sentence:
+            xmin=instance['adjusted_bbox'][0]
+            w=instance['adjusted_bbox'][2]
+            instance['adjusted_bbox'][0] = 2048-xmin #-w NO NEED TO MINUS W !
 
+            w1 = abs(instance['polygon'][0][0] - instance['polygon'][1][0])
+            w2 = abs(instance['polygon'][2][0] - instance['polygon'][3][0])
+
+            instance['polygon'][0][0] = 2048 - instance['polygon'][0][0] #- w1
+            instance['polygon'][1][0] = 2048 - instance['polygon'][1][0] #- w1
+
+            instance['polygon'][2][0] = 2048 - instance['polygon'][2][0] #- w2
+            instance['polygon'][3][0] = 2048 - instance['polygon'][3][0] #- w2
+    annot['image_id'] = new_id
+    f2.write(json.dumps(annot) + '\n')
+
+def augment_rotate_30 (path,old_id,annot) :
+    img_original = cv2.imread(path)
+    (h, w) = img_original.shape[:2]
+    center = (w / 2, h / 2)
+    M = cv2.getRotationMatrix2D(center, -30, 1)
+    rotated = cv2.warpAffine(img_original, M, (w, h))
+   # img_rot = cv2.flip(img_original, 1)
+    new_id = old_id[0] + '6' + old_id[2:]
+    cv2.imwrite('../data/images/augmented/' + new_id + '.png', rotated)
+    annotations = annot['annotations']
+
+    costheta = math.cos(math.pi/6)
+    sintheta = math.sin(math.pi/6)
+
+    annotations = annot['annotations']
+    for sentence in annotations:
+        for instance in sentence:
+            x1 = instance['polygon'][0][0] -1024
+            y1 = instance['polygon'][0][1] -1024
+            x2 = instance['polygon'][1][0] -1024
+            y2 = instance['polygon'][1][1] -1024
+            x3 = instance['polygon'][2][0] -1024
+            y3 = instance['polygon'][2][1] -1024
+            x4 = instance['polygon'][3][0] -1024
+            y4 = instance['polygon'][3][1] -1024
+
+            instance['polygon'][0][0] = 1024-x1*costheta-y1*sintheta
+            instance['polygon'][1][0] = -x2*costheta-y2*sintheta +1024
+            instance['polygon'][2][0] = -x3*costheta-y3*sintheta+1024
+            instance['polygon'][3][0] = -x4*costheta-y4*sintheta+1024
+
+            instance['polygon'][0][1] = 1024 -x1 * sintheta + y1 * costheta
+            instance['polygon'][1][1] = 1024 -x2 * sintheta + y2 * costheta
+            instance['polygon'][2][1] = 1024 - x3 * sintheta + y3 * costheta
+            instance['polygon'][3][1] = 1024 - x4 * sintheta + y4 * costheta
+
+    annot['image_id'] = new_id
+    f2.write(json.dumps(annot) + '\n')
+
+def augment_image (annot,f2) :
+    old_id = annot['image_id']
+    path = os.path.join(settings.TRAINVAL_IMAGE_DIR, annot['file_name'])
+    assert os.path.exists(path), 'file not exists: {}'.format(path)
+    #augment_rain(path,old_id)
+    #augment_snow(path,old_id)
+    #augment_lum_plus(path,old_id)
+    #augment_lum_min(path,old_id)
+    augment_flip_hor (path,old_id,annot)
+    augment_rotate_30(path,old_id,annot)
 
 with open(settings.TRAIN) as f:
-    f1 = open("../data/annotations/train_processed.jsonl", "w+")
-    f2 = open("../data/annotations/augmented/train_processed.jsonl","w+")
+    f1 = open(settings.TRAIN_PROCESSED, "w+")
+    f2 = open(settings.TRAIN_AUGMENTED,"w+")
     list_filtered=[]
     json_lines = f.readlines()
     for i in range(len(json_lines)):
