@@ -198,10 +198,10 @@ def augment_image (annot,f2) :
     old_id = annot['image_id']
     path = os.path.join(settings.TRAINVAL_IMAGE_DIR, annot['file_name'])
     assert os.path.exists(path), 'file not exists: {}'.format(path)
-    #augment_rain(path,old_id)
-    #augment_snow(path,old_id)
-    #augment_lum_plus(path,old_id)
-    #augment_lum_min(path,old_id)
+    augment_rain(path,old_id)
+    augment_snow(path,old_id)
+    augment_lum_plus(path,old_id)
+    augment_lum_min(path,old_id)
     augment_flip_hor (path,old_id,annot)
     augment_rotate_30(path,old_id,annot)
 
