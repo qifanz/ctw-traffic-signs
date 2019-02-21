@@ -13,3 +13,10 @@ This step mainly consists of filtering data that contains traffic signs and data
 To do so, you could run in /prepare:  
 ```  python augmentation.py  ```  
 Augmentated dataset will be generated in /data/images/augmented. And a new jsonl annotations file will be generated in /data/annotations/augmented. This step could take very long time. (up to several hours)  
+The second digit of image_id represents the type of augmentation:  
+- 1 for rainy
+- 2 for snowy
+- 3 for illumination plus
+- 4 for illumination minus
+- 5 for horizontal flipping
+- 6 for rotation
