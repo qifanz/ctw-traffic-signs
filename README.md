@@ -12,7 +12,8 @@ If you wish to change an image, you could simply change the id in line 16. (This
 This step mainly consists of filtering data that contains traffic signs and data augmentation.  
 To do so, you could run in /prepare:  
 ```  python augmentation.py  ```  
-Augmentated dataset will be generated in /data/images/augmented. And a new jsonl annotations file will be generated in /data/annotations/augmented. This step could take very long time. (up to several hours)  
+Augmentated dataset will be generated in /data/images/augmented. And a new jsonl annotations file will be generated in /data/annotations/augmented. This step could take very long time. (up to several hours) 
+  
 The second digit of image_id represents the type of augmentation:  
 - 1 for rainy
 - 2 for snowy
@@ -20,3 +21,5 @@ The second digit of image_id represents the type of augmentation:
 - 4 for illumination minus
 - 5 for horizontal flipping
 - 6 for rotation
+  
+ The bounding box are already recalculated for augmented images. You could use draw_bb.py to visualize them.
