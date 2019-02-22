@@ -8,7 +8,7 @@ import numpy as np
 import pprint
 import math
 
-sys.path.append('C:\\Users\\flavi\\PycharmProjects\\ctw-traffic-signs')
+# sys.path.append('C:\\Users\\flavi\\PycharmProjects\\ctw-traffic-signs')
 import settings
 
 from pythonapi import anno_tools
