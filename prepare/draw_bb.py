@@ -13,7 +13,7 @@ with open(settings.TRAIN_AUGMENTED) as f:
     lines = f.readlines()
     for line in lines:
         anno = json.loads(line)
-        if anno['image_id'] == "0600223":
+        if anno['image_id'] == "0500223":
             to_show = anno
             break
 path = os.path.join(settings.TRAINVAL_AUGMENTED_DIR, to_show['image_id']+'.png')
