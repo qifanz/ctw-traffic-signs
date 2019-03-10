@@ -1,21 +1,21 @@
 # ctw-traffic-signs
-This is a project for the interview questions. The main goal is to detect chinese characters on traffic signs.
+This is a project for the interview questions. The main goal is to detect chinese characters on traffic signs.  
  
 ## Dataset
-In this project the dataset Traffic Panel Database is used. This dataset is elaborated by National Nature Science Foundation of China(NSFC).  
-The TPD includes 2329 traffic images containing various types of traffic panels, The images are collected under a wide variety of different situations, such as weather condition, illumination, different surroundings, partial occluson and so on.
+In this project the dataset Traffic Panel Database is used. This dataset is elaborated by National Nature Science Foundation of China(NSFC).   
+The TPD includes 2329 traffic images containing various types of traffic panels, The images are collected under a wide variety of different situations, such as weather condition, illumination, different surroundings, partial occluson and so on.  
 
 ## Preparation
-You should first download dataset http://www.nlpr.ia.ac.cn/pal/trafficdata/panel.html (dataset B which is labelled). 
-Randomly split them according to your preferred proportion (I used 85% ~ 15%). Put them into /data/image/train and /data/image/val. 
-Randomly split annotation file and put them into /data/annotation/train and /data/annotation/val. 
-Verify the path in /prepare/settings_qifan.py correponds to the correct path. 
+You should first download dataset http://www.nlpr.ia.ac.cn/pal/trafficdata/panel.html (dataset B which is labelled).  
+Randomly split them according to your preferred proportion (I used 85% ~ 15%). Put them into /data/image/train and /data/image/val.  
+Randomly split annotation file and put them into /data/annotation/train and /data/annotation/val.  
+Verify the path in /prepare/settings_qifan.py correponds to the correct path.  
 
 ## Preprocessing
-This project is going to use Yolo-v3 based on Darknet. You should run in /prapare:
+This project is going to use Yolo-v3 based on Darknet. You should run in /prapare:  
 ``` python preprocess.py ```
-This script will process the original annotations and create the Darknet compatible annotations in /data/annotation/train_processed and /data/annotation/val_processed.
-You can also adapt the augmentation.py (originally created to augment the ctw dataset by me) script to augment the dataset. In order to train faster, this step is not applied.
+This script will process the original annotations and create the Darknet compatible annotations in /data/annotation/train_processed and /data/annotation/val_processed.  
+You can also adapt the augmentation.py (originally created to augment the ctw dataset by me) script to augment the dataset. In order to train faster, this step is not applied.  
 
 
 
