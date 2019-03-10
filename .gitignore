@@ -103,5 +103,9 @@ ENV/
 # mypy
 .mypy_cache/
 
-/data
+/data/annotation
+/data/image
+/data/backup
+/data/traffic
+
 
