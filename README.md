@@ -14,11 +14,11 @@ Verify the path in /prepare/settings_qifan.py correponds to the correct path.
 ## Preprocessing
 This project is going to use Yolo-v3 based on Darknet. You should run in /prapare:  
 ``` python preprocess.py ```  
-This script will process the original annotations and create the Darknet compatible annotations in /data/annotation/train_processed and /data/annotation/val_processed.  
+This script will process the original annotations and create the Darknet compatible annotations in /data/annotation/train_processed and /data/annotation/val_processed, and the train.txt/val.txt file.  
 
 You can also adapt the augmentation.py (originally created to augment the ctw dataset by me) script to augment the dataset. In order to train faster, this step is not applied.  Besides, several kinds of augmentation are integrated in Darknet implementation. (See cfg file: angle, saturation, exposure, hue)
 
-You should also create files needed by Darknet (.cfg, .data, .names and .txt). More detail can be found on Darknet's repository.  
+You should also create files needed by Darknet (.cfg, .data, .names and). More detail can be found on Darknet's repository.  
 The version used in project is in /data.
 
 
