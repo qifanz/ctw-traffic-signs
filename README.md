@@ -18,7 +18,7 @@ This script will process the original annotations and create the Darknet compati
 
 You can also adapt the augmentation.py (originally created to augment the ctw dataset by me) script to augment the dataset. In order to train faster, this step is not applied.  Besides, several kinds of augmentation are integrated in Darknet implementation. (See cfg file: angle, saturation, exposure, hue)
 
-You should also create files needed by Darknet (.cfg, .data, .names and). More detail can be found on Darknet's repository.  
+You should also create files needed by Darknet (.cfg, .data, .names). More detail can be found on Darknet's repository.  
 The version used in project is in /data.
 
 
