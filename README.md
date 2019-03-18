@@ -40,7 +40,7 @@ The structure of repository:
 ```
 
 Then launch  
-```darknet.exe detector train data/traffic.data data/traffic.cfg yolov3-tiny.conv.15```
+```darknet detector train data/traffic.data data/traffic.cfg yolov3-tiny.conv.15```
 
 The training takes ~15h on GTX1060 3G
 
