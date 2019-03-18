@@ -51,9 +51,9 @@ Please launch
 and enter relative path to image to show the detection result.
 
 ## What I have learned
-I read a lot of paper related to this subject(R-cnn, fast-rcnn, faster-rcnn, yolo, yolo9000, yolo-v3).
-I learned how to use darknet framework (and read, modified some code inside).
-I played with the dataset and got an interesting detection system :)
+- I read a lot of paper related to this subject(R-cnn, fast-rcnn, faster-rcnn, yolo, yolo9000, yolo-v3).
+- I learned how to use darknet framework (and read, modified some code inside).
+- I played with the dataset and got an interesting detection system :)
 
 
 # Legacy version
