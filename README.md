@@ -24,7 +24,7 @@ The files I used in this project are in /data.
 ## Train
 Once you have all the files (cfg, data, names, and darknet format training image and annotation generated in the previous step), you need to download the initial weights for yolov3-tiny https://pjreddie.com/media/files/yolov3-tiny.weights.  
 Then launch  
-````darknet.exe detector train data/traffic.data data/traffic.cfg yolov3-tiny.conv.15```
+```darknet.exe detector train data/traffic.data data/traffic.cfg yolov3-tiny.conv.15```
 
 The training takes ~15h on GTX1060 3G
 
