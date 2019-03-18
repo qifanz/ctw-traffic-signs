@@ -22,6 +22,11 @@ You should also create files needed by Darknet (.cfg, .data, .names). More detai
 The files I used in this project are in /data.
 
 ## Train
+Once you have all the files (cfg, data, names, and darknet format training image and annotation generated in the previous step), you need to download the initial weights for yolov3-tiny https://pjreddie.com/media/files/yolov3-tiny.weights.  
+Then launch  
+````darknet.exe detector train data/traffic.data data/traffic.cfg yolov3-tiny.conv.15```
+
+The training takes ~15h on GTX1060 3G
 
 ## Detection
 The traffic.data traffic.cfg file (config of the network) is in /data, the trained weights file is in https://1drv.ms/u/s!AlMQ1-20BD4XwlTG5aYsWS51g-3j.
