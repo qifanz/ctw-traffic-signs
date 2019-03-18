@@ -1,5 +1,6 @@
 # ctw-traffic-signs
 This is a project for the interview questions. The main goal is to detect chinese characters on traffic signs.  
+In this project, the AlexeyAB/darknet repository is used for training (https://github.com/AlexeyAB/darknet). 
  
 ## Dataset
 In this project the dataset Traffic Panel Database is used. This dataset is elaborated by National Nature Science Foundation of China(NSFC).   
@@ -22,6 +23,7 @@ You should also create files needed by Darknet (.cfg, .data, .names). More detai
 The files I used in this project are in /data.
 
 ## Train
+First you should compile AlexeyAB/darknet repository.  
 Once you have all the files (cfg, data, names, and darknet format training image and annotation generated in the previous step), you need to download the initial weights for yolov3-tiny https://pjreddie.com/media/files/yolov3-tiny.weights.  
 Then launch  
 ```darknet.exe detector train data/traffic.data data/traffic.cfg yolov3-tiny.conv.15```
