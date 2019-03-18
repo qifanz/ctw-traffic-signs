@@ -21,7 +21,13 @@ You can also adapt the augmentation.py (originally created to augment the ctw da
 You should also create files needed by Darknet (.cfg, .data, .names). More detail can be found on Darknet's repository.  
 The version used in project is in /data.
 
+## Train
 
+## Detection
+The traffic.data traffic.cfg file (config of the network) is in /data, the trained weights file is in https://1drv.ms/u/s!AlMQ1-20BD4XwlTG5aYsWS51g-3j.
+Please launch  
+```darknet detector test <relative path to .data> <relative path to .cfg> <relative path to .weights> -i 0 -thresh 0.25```  
+and enter relative path to image to show the detection result.
 
 
 # Legacy version
